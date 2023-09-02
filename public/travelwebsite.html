@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href=style.css>
+
+	<title>Travelpedia </title>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js">
+		require("jsdom").env("", function (err, window) {
+			if (err) {
+				console.error(err);
+				return;
+			}
+
+			var $ = require("jquery")(window);
+		});
+	</script>
+
+	<script>
+		//rollover script
+		$(document).ready(function () {
+			$('#pictures li img').each(function () {
+				var oldSrc = $(this).attr('src');
+				var newPhoto = new Image();
+				var imgExt = /(\.\w{3,4}$)/;
+				newPhoto.src = oldSrc.replace(imgExt, 'rollover$1');
+
+				$(this).hover(
+					function () {
+						$(this).attr('src', newPhoto.src);
+					},
+					function () {
+						$(this).attr('src', oldSrc);
+					}
+				); // end hover
+			}); // end each
+		}); // end ready
+	</script>
+
+	<script>
+		//animate script
+		$(document).ready(function () {
+			$('.animate').hover(
+				function () {
+					$(this).stop().animate({ fontSize: '21px' }, 400);
+				},
+				function () {
+					$(this).stop().animate({ fontSize: '15px' }, 400);
+				}
+			); // end hover
+		}); // end ready
+	</script>
+</head>
+
+<body>
+	<div id="page-container">
+		<header id="header">
+			<nav>
+				<ul id="menu">
+					<li><img src="images/compass.png" id="logo"></li>
+					<li class="logoText">Travelpedia</li>
+					<li>
+						<div id="line"></div>
+					</li>
+					<li><a href="home.html" class="animate">Home</a></li>
+					<li><a href="home.html" class="animate">Gallery</a></li>
+					<li><a href="contact.html" class="animate">Contact</a></li>
+					<li><a href="../index.html" target="_blank" class="animate">Tutorials</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content-wrap">
+			<div id="bg">Explore</div>
+			<div id="darkBar">
+				<nav id="contentNav">
+					<ul>
+						<li style="padding-right: 1rem; cursor: default;">Where do you want to go?</li>
+						<li><select id="location">
+								<option value="" selected disabled hidden>Location</option>
+								<option value="rome">Rome, Italy</option>
+								<option value="iceland">Iceland</option>
+								<option value="nyc">New York City, New York</option>
+								<option value="giza">Giza, Egypt</option>
+								<option value="rio">Rio De Janeiro, Brazil</option>
+							</select>
+						</li>
+						<li><input id="date" type="text" name="datepicker" value="Date">
+							<script>
+								const elem = document.querySelector('input[name="datepicker"]');
+								const datepicker = new Datepicker(elem, {});
+							</script>
+						</li>
+						<li><button id="searchBtn">Search</button></li>
+					</ul>
+				</nav>
+			</div>
+			<div id="popDests">
+				<div id="captionHeader">Popular Destinations</div>
+				<div id="caption">Hover over the destinations below to see even more spectacular vacation spots!
+					<br>Please visit the contact page to get a quote for one of these amazing locations.
+				</div>
+			</div>
+			<div>
+				<ul id="pictures">
+					<li><img class="pic" src="images/rome.jpg"></li>
+					<li><img class="pic" src="images/iceland.jpg"></li>
+					<li><img class="pic" src="images/nyc.jpg"></li>
+				</ul>
+				<ul id="pictures">
+					<li><img class="pic" src="images/egypt.jpg"></li>
+					<li><img class="pic" src="images/rio.jpg"></li>
+					<li>
+						<div class="pic"></div>
+					</li>
+				</ul>
+
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

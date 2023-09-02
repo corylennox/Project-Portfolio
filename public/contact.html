@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href=style.css>
+	<script src="jquery.min.js"></script>
+	<script src="jquery.validate.min.js"></script>
+	<script>
+		jQuery.validator.addMethod("validateEmail", function (value, element, param) {
+			return (value.match(/^[a-zA-Z0-9_\.%\+\-]+@[a-zA-Z0-9\.\-]+\.[com|net|org]{3}$/));
+		});
+
+		$(document).ready(function () {
+			$('#form').validate({
+				focusInvalid: true,
+				rules: {
+					email: {
+						required: true,
+						validateEmail: true,
+					}
+				}, //end rules
+				messages: {
+					name: {
+						required: "Please supply a name."
+					},
+					email: {
+						required: "Please supply an e-mail address.",
+						validateEmail: "This is not a valid email address. (.com, .org, .net)"
+					}
+				},
+				errorElement: 'div',
+				errorPlacement: function (error, element) {
+					error.insertAfter(element);
+					//error.appendTo(element.parent());
+				},
+			}); // end validate 
+		}); // end ready
+	</script>
+
+	<script>
+		//animate script
+		$(document).ready(function () {
+			$('.animate').hover(
+				function () {
+					$(this).stop().animate({ fontSize: '21px' }, 400);
+					$(this).css("background-color", "rgba(214, 214, 214, 0.685)");
+				},
+				function () {
+					$(this).stop().animate({ fontSize: '15px' }, 400);
+					$(this).css("background-color", "none");
+				}
+			); // end hover
+		}); // end ready
+	</script>
+
+	<title>Contact Us</title>
+</head>
+
+<body>
+	<div id="page-container">
+		<header id="header">
+			<nav>
+				<ul>
+					<li><img src="images/compass.png" id="logo"></li>
+					<li class="logoText">Travelpedia</li>
+					<li>
+						<div id="line"></div>
+					</li>
+					<li><a href="home.html" class="animate">Home</a></li>
+					<li><a href="home.html" class="animate">Gallery</a></li>
+					<li><a href="contact.html" class="animate">Contact</a></li>
+					<li><a href="../index.html" target="_blank" class="animate">Tutorials</a></li>
+				</ul>
+			</nav>
+		</header>
+		<div id="content-wrap">
+			<div id="contactBg">
+				<div id="formContainer">
+					<div id="formDiv">
+						<form id="form" action="process.html" method="post">
+							<div id="contactUsTxt">Contact Us</div>
+							<div>
+								<label for="name" class="label">NAME </label><br>
+								<input name="name" type="text" class="required" id="name">
+							</div>
+							<div>
+								<label for="email" class="label">EMAIL</label><br>
+								<input name="email" type="text" id="email">
+							</div>
+
+							<div>
+								<label for="message" class="label">MESSAGE</label> <br>
+								<textarea name="message" id="message"></textarea>
+							</div>
+							<div id="buttonDiv"><button id="submitBtn">Submit</button></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Dashboard</title>
+
+    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.11.4.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script> -->
+    <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+
+    <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js" crossorigin></script>
+
+    <script src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js" crossorigin></script>
+
+
+    <style>
+        #phoneDetails {
+            position: absolute;
+            top: 20%;
+            height: 60%;
+            bottom: 20%;
+            left: 20%;
+            width: 60%;
+            right: 20%;
+            padding: 0.4em;
+            z-index: 1000;
+        }
+
+        #hexDetails {
+            position: absolute;
+            top: 20%;
+            height: 60%;
+            bottom: 20%;
+            left: 20%;
+            width: 60%;
+            right: 20%;
+            padding: 0.4em;
+            z-index: 1000;
+        }
+
+        #caseDetails {
+            position: absolute;
+            top: 20%;
+            height: 60%;
+            bottom: 20%;
+            left: 20%;
+            width: 60%;
+            right: 20%;
+            padding: 0.4em;
+            z-index: 1000;
+        }
+
+        #overlay {
+            height: 100%;
+            width: 100%;
+            z-index: 1001;
+        }
+
+        table,
+        th,
+        td {
+            text-align: center;
+        }
+
+        #statHeader {
+            height: 28%;
+            vertical-align: middle;
+        }
+
+        #statSubHeader {
+            height: 7%;
+            vertical-align: middle;
+        }
+
+        #statTableLeft {
+            position: absolute;
+            top: 4%;
+            height: 20%;
+            bottom: 76%;
+            left: 2%;
+            width: 32%;
+        }
+
+        #statTableRight {
+            position: absolute;
+            top: 4%;
+            height: 20%;
+            bottom: 76%;
+            width: 63%;
+            right: 2%;
+        }
+
+        #exTable {
+            position: absolute;
+            top: 26%;
+            height: 72%;
+            bottom: 2%;
+            left: 2%;
+            width: 96%;
+            right: 2%;
+        }
+
+        #exCellLeft {
+            vertical-align: top;
+            width: 50%;
+            padding-top: 20px;
+            padding-right: 10px;
+            padding-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        #exCellRight {
+            vertical-align: top;
+            width: 50%;
+            height: 100%;
+            padding-top: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            padding-left: 10px;
+        }
+
+        tr.label-default {
+            pointer-events: none;
+        }
+
+        tr.label-primary {
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="z-index:1000;">
+        <!--Status bar left table begin-->
+        <div id="overlay">
+            <table id="statTableLeft" class="table table-condensed
+                    table-bordered">
+                <tr id="statHeader" class="label-primary">
+                    <th style="vertical-align: middle" colspan="2">
+                        <font size="5">Urgent</font>
+                    </th>
+                    <th style="vertical-align: middle" colspan="2">
+                        <font size="5">Support</font>
+                    </th>
+                </tr>
+                <tr id="statSubHeader" class="label-default">
+                    <th>Waiting</th>
+                    <th>Max Wait</th>
+                    <th>Waiting</th>
+                    <th>Max Wait</th>
+                </tr>
+                <tr style="height:70%">
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="urgentWaiting"></b></font>
+                    </td>
+                    <td style="vertical-align: middle; width:30%;">
+                        <font size="9"><b id="urgentMaxWait"></b></font>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="supportWaiting"></b></font>
+                    </td>
+                    <td style="vertical-align: middle; width:30%;">
+                        <font size="9"><b id="supportMaxWait"></b></font>
+                    </td>
+                </tr>
+            </table>
+            <!--Status bar right table begin-->
+            <table id="statTableRight" class="table table-condensed
+                    table-bordered">
+                <tr id="statHeader" class="label-primary">
+                    <th style="width:36%; vertical-align: middle;" colspan="3">
+                        <font size="5">Unassigned</font>
+                    </th>
+                    <th style="width:12%; vertical-align: middle;" rowspan="2">
+                        <font size="5">SLA</font>
+                    </th>
+                    <th style="width:12%; vertical-align: middle;" rowspan="2">
+                        <font size="5">NCC</font>
+                    </th>
+                    <th style="width:14%; vertical-align: middle;" rowspan="2">
+                        <font size="4">Comment w/ No Reply (>4 hrs) </font>
+                    </th>
+                    <th style="width:14%; vertical-align: middle;" rowspan="2">
+                        <font size="4">No Public Comment <br />(>5 days)
+                        </font>
+                    </th>
+                    <th style="width:12%; vertical-align: middle;" rowspan="2">
+                        <font size="5">HEX</font>
+                    </th>
+                </tr>
+                <tr id="statSubHeader" class="label-default">
+                    <th>Crit</th>
+                    <th>Maj</th>
+                    <th>Min</th>
+                </tr>
+                <tr style="height:70%">
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="unassignedCrit"></b></font>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="unassignedMaj"></b></font>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="unassignedMin"></b></font>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="sla"></b></font>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="ncc"></b></font>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="commentNoReply"></b></font>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="noPublicComment"></b></font>
+                    </td>
+                    <td style="vertical-align: middle">
+                        <font size="9"><b id="hex"></b></font>
+                    </td>
+                </tr>
+            </table>
+
+            <!--Exception Report table begins-->
+            <table id="exTable" class="table-bordered">
+                <tr style="height: 5%">
+                    <th class="label-default" colspan="2" style="vertical-align: middle">
+                        <font size="4">Exception Report</font>
+                    </th>
+                </tr>
+                <tr>
+                    <td id="exCellLeft">
+                        <!--Phone Table-->
+                        <table id="phoneTable" class="table table-condensed
+                                table-hover table-striped table-bordered">
+                            <tr>
+                                <th class="label-primary" colspan="4">
+                                    <font size="4">Phone</font>
+                                </th>
+                            </tr>
+                            <tr class="label-default">
+                                <th style="width:31%">
+                                    <font size="2">Queue (Urgent/Support)</font>
+                                </th>
+                                <th style="width:31%">
+                                    <font size="2">Phone Number</font>
+                                </th>
+                                <th style="width:30%">
+                                    <font size="2">Time in Queue (min)</font>
+                                </th>
+                                <th style="width:8%">
+                                    <font size="2">Ack Ind</font>
+                                </th>
+                            </tr>
+                        </table>
+
+                        <!--HEX Table-->
+                        <table id="hexTable" class="table table-condensed
+                                table-hover table-striped table-bordered">
+                            <tr>
+                                <th class="label-primary" colspan="6">
+                                    <font size="4">HEX</font>
+                                </th>
+                            </tr>
+                            <tr font-size="3" class="label-default">
+                                <th style="width:14%">
+                                    <font size="2">Hex ID</font>
+                                </th>
+                                <th style="width:23%">
+                                    <font size="2">Account Name</font>
+                                </th>
+                                <th style="width:22%">
+                                    <font size="2">Time Until SLA Commitment</font>
+                                </th>
+                                <th style="width:15%">
+                                    <font size="2">Service Type (SLA)</font>
+                                </th>
+                                <th style="width:18%">
+                                    <font size="2">Ship-to Country</font>
+                                </th>
+                                <th style="width:8%">
+                                    <font size="2">Ack Ind</font>
+                                </th>
+
+                            </tr>
+                        </table>
+                    </td>
+                    <td id="exCellRight">
+                        <!--Case Table-->
+                        <table id="caseTable" class="table table-striped
+                                table-condensed table-hover table-bordered">
+                            <tr>
+                                <th class="label-primary" colspan=" 6">
+                                    <font size="4">Case</font>
+                                </th>
+                            </tr>
+                            <tr class="label-default">
+                                <th style="width: 12%">
+                                    <font size="2">Case ID</font>
+                                </th>
+                                <th style="width: 20%">
+                                    <font size="2">Case Owner</font>
+                                </th>
+                                <th style="width: 20%">
+                                    <font size="2">Account Name</font>
+                                </th>
+                                <th style="width: 20%">
+                                    <font size="2">Alert Type</font>
+                                </th>
+                                <th style="width: 20%">
+                                    <font size="2">Time Until Expiration</font>
+                                </th>
+                                <th style="width: 8%">
+                                    <font size="2">Ack Ind</font>
+                                </th>
+                            </tr>
+                        </table>
+                        <script>
+                            function generateRandomNumber(length) {
+                                return Math.floor(Math.pow(10, length - 1) + Math.random() * 9 * Math.pow(10, length - 1)).toString();
+                            }
+                            //Data
+                            var phoneData = [
+                                { type: "Urgent", number: generateRandomNumber(3) + "-" + generateRandomNumber(3) + "-" + generateRandomNumber(4) },
+                                { type: "Support", number: generateRandomNumber(3) + "-" + generateRandomNumber(3) + "-" + generateRandomNumber(4) },
+                            ];
+                            var caseData = [
+                                { caseId: "#" + generateRandomNumber(7), caseOwner: "Tech #1", accountName: "Apple", alertType: "SLA", timeUntilExpiration: "30m", },
+                                { caseId: "#" + generateRandomNumber(7), caseOwner: "Tech #2", accountName: "Microsoft", alertType: "NCC", timeUntilExpiration: "1h 45m", },
+                                { caseId: "#" + generateRandomNumber(7), caseOwner: "Tech #3", accountName: "Meta", alertType: "Public Comment", timeUntilExpiration: "6h", },
+                                { caseId: "#" + generateRandomNumber(7), caseOwner: "Tech #4", accountName: "Amazon", alertType: "Customer Comment", timeUntilExpiration: "1d 12h", },
+                                { caseId: "#" + generateRandomNumber(7), caseOwner: "Tech #5", accountName: "Google", alertType: "NCC", timeUntilExpiration: "3d 15h", },
+                                { caseId: "#" + generateRandomNumber(7), caseOwner: "Tech #6", accountName: "Tesla", alertType: "SLA", timeUntilExpiration: "4d 4h", },
+
+
+                            ];
+                            var hexData = [
+                                { hexID: "#" + generateRandomNumber(7), accountName: "DellEMC", timeUntilSLA: "40m", serviceType: "Technical Service", shipToCountry: "USA" },
+                                { hexID: "#" + generateRandomNumber(7), accountName: "HPE SimpliVity", timeUntilSLA: "1h 30m", serviceType: "Customer Service", shipToCountry: "USA" },
+                                { hexID: "#" + generateRandomNumber(7), accountName: "Analog Devices", timeUntilSLA: "2h 20m", serviceType: "Warranty Claim", shipToCountry: "USA" },
+                                { hexID: "#" + generateRandomNumber(7), accountName: "Dassault Systemes", timeUntilSLA: "2h 40m", serviceType: "Installation", shipToCountry: "France" },
+                            ]
+
+                            var statusBarData = {
+                                urgentWaiting: "1",
+                                supportWaiting: "2",
+                                unassignedCrit: "2",
+                                unassignedMaj: "1",
+                                unassignedMin: "3",
+                                sla: "2",
+                                ncc: "2",
+                                commentNoReply: "1",
+                                noPublicComment: "1",
+                                hex: "4"
+                            }
+
+                            // populate status bar
+                            document.getElementById("urgentWaiting").innerHTML = statusBarData.urgentWaiting;
+                            document.getElementById("supportWaiting").innerHTML = statusBarData.supportWaiting;
+                            document.getElementById("unassignedCrit").innerHTML = statusBarData.unassignedCrit;
+                            document.getElementById("unassignedMaj").innerHTML = statusBarData.unassignedMaj;
+                            document.getElementById("unassignedMin").innerHTML = statusBarData.unassignedMin;
+                            document.getElementById("sla").innerHTML = statusBarData.sla;
+                            document.getElementById("ncc").innerHTML = statusBarData.ncc;
+                            document.getElementById("commentNoReply").innerHTML = statusBarData.commentNoReply;
+                            document.getElementById("noPublicComment").innerHTML = statusBarData.noPublicComment;
+                            document.getElementById("hex").innerHTML = statusBarData.hex;
+
+                            // populate phone table 
+                            var phoneTable = document.getElementById("phoneTable");
+
+                            for (var i = 0; i < phoneData.length; i++) {
+                                var row = phoneTable.insertRow();
+                                row.className = "dataRow";
+                                var typeCell = row.insertCell();
+                                var numberCell = row.insertCell();
+                                var timeCell = row.insertCell();
+                                var checkboxCell = row.insertCell();
+
+                                typeCell.innerHTML = "<font size='2'>" + phoneData[i].type + "</font>";
+                                numberCell.innerHTML = "<font size='2'>" + phoneData[i].number + "</font>";
+                                timeCell.innerHTML = "<font size='2' id='phoneRow" + i + "'>" + phoneData[i].time + "</font>";
+                                checkboxCell.innerHTML = "<label><input type='checkbox' /></label>";
+                            }
+
+                            // populate case table
+                            var caseTable = document.getElementById("caseTable");
+
+                            for (var i = 0; i < caseData.length; i++) {
+                                var row = caseTable.insertRow();
+                                row.className = "dataRow";
+                                var caseIdCell = row.insertCell();
+                                var caseOwnerCell = row.insertCell();
+                                var accountNameCell = row.insertCell();
+                                var alertTypeCell = row.insertCell();
+                                var timeUntilExpirationCell = row.insertCell();
+                                var checkboxCell = row.insertCell();
+
+                                caseIdCell.innerHTML = "<font size='2'>" + caseData[i].caseId + "</font>";
+                                caseOwnerCell.innerHTML = "<font size='2'>" + caseData[i].caseOwner + "</font>";
+                                accountNameCell.innerHTML = "<font size='2'>" + caseData[i].accountName + "</font>";
+                                alertTypeCell.innerHTML = "<font size='2'>" + caseData[i].alertType + "</font>";
+                                timeUntilExpirationCell.innerHTML = "<font size='2'>" + caseData[i].timeUntilExpiration + "</font>";
+                                checkboxCell.innerHTML = "<label><input type='checkbox' /></label>";
+                            }
+
+                            // populate hex table
+                            var hexTable = document.getElementById("hexTable");
+
+                            for (var i = 0; i < hexData.length; i++) {
+                                var row = hexTable.insertRow();
+                                row.className = "dataRow";
+                                var hexIdCell = row.insertCell();
+                                var accountNameCell = row.insertCell();
+                                var timeUntilSLACell = row.insertCell();
+                                var serviceTypeCell = row.insertCell();
+                                var shipToCountryCell = row.insertCell();
+                                var checkboxCell = row.insertCell();
+
+                                hexIdCell.innerHTML = "<font size='2'>" + hexData[i].hexID + "</font>";
+                                accountNameCell.innerHTML = "<font size='2'>" + hexData[i].accountName + "</font>";
+                                timeUntilSLACell.innerHTML = "<font size='2'>" + hexData[i].timeUntilSLA + "</font>";
+                                serviceTypeCell.innerHTML = "<font size='2'>" + hexData[i].serviceType + "</font>";
+                                shipToCountryCell.innerHTML = "<font size='2'>" + hexData[i].shipToCountry + "</font>";
+                                checkboxCell.innerHTML = "<label><input type='checkbox' /></label>";
+                            }
+                            //populate dynamic data
+                            var urgentMaxWait = document.getElementById("urgentMaxWait");
+                            var supportMaxWait = document.getElementById("supportMaxWait");
+                            var phoneRow0 = document.getElementById("phoneRow0");
+                            var phoneRow1 = document.getElementById("phoneRow1");
+
+                            var urgentStopwatch = {
+                                minutes: 3,
+                                seconds: 46
+                            };
+                            var supportStopwatch = {
+                                minutes: 19,
+                                seconds: 23
+                            };
+
+                            function updateClock() {
+                                urgentStopwatch.seconds++;
+                                supportStopwatch.seconds++;
+                                if (urgentStopwatch.seconds === 60) {
+                                    urgentStopwatch.seconds = 0;
+                                    urgentStopwatch.minutes++;
+                                }
+                                if (urgentStopwatch.minutes === 60) {
+                                    urgentStopwatch.minutes = 0;
+                                    urgentStopwatch.hours++;
+                                }
+                                if (supportStopwatch.seconds === 60) {
+                                    supportStopwatch.seconds = 0;
+                                    supportStopwatch.minutes++;
+                                }
+                                if (supportStopwatch.minutes === 60) {
+                                    supportStopwatch.minutes = 0;
+                                    supportStopwatch.hours++;
+                                }
+                                urgentMaxWait.textContent =
+                                    (urgentStopwatch.minutes ? (urgentStopwatch.minutes > 9 ? urgentStopwatch.minutes : urgentStopwatch.minutes) : "0") + ":" +
+                                    (urgentStopwatch.seconds > 9 ? urgentStopwatch.seconds : "0" + urgentStopwatch.seconds);
+
+                                supportMaxWait.textContent =
+                                    (supportStopwatch.minutes ? (supportStopwatch.minutes > 9 ? supportStopwatch.minutes : supportStopwatch.minutes) : "0") + ":" +
+                                    (supportStopwatch.seconds > 9 ? supportStopwatch.seconds : "0" + supportStopwatch.seconds);
+
+                                phoneRow0.textContent =
+                                    (urgentStopwatch.minutes ? urgentStopwatch.minutes : "0") + "m";
+
+                                phoneRow1.textContent =
+                                    (supportStopwatch.minutes ? supportStopwatch.minutes : "0") + "m";
+
+                            }
+                            updateClock();
+                            setInterval(updateClock, 1000);
+
+                            setInterval(function () {
+                                phoneRow.textContent = urgentStopwatch.minutes;
+                            }, 60000)
+                        </script>
+                    </td>
+                </tr>
+            </table>
+        </div>
+</body>
+
+
+
+</html>

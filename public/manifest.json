@@ -1,0 +1,14 @@
+{
+  "short_name": "Project Portfolio",
+  "name": "Cory Lennox's Project Portfolio",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "284x211"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff"
+}
