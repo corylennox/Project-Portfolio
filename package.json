@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^14.4.3",
     "bootstrap": "^5.3.0",
     "css-select": "^5.1.0",
+    "dotenv-run-script": "^0.4.1",
     "jquery": "^3.7.0",
     "jsdom": "^22.1.0",
     "react": "^18.2.0",
@@ -21,14 +22,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "ssh-aws": "ssh -i \"certs/key.pem\" ec2-user@ec2-3-225-43-117.compute-1.amazonaws.com",
-    "initiate-pm2": "pm2 start npm --name \"app\" -- run start --watch",
-    "start-pm2": "pm2 start all",
-    "stop-pm2": "pm2 stop all",
-    "iptables": "sudo iptables -A PREROUTING -t nat -i enX0 -p tcp --dport 80 -j DNAT --to-destination 172.31.88.155:3000"
+    "ssh-aws": "npx dotenv-run-script _ssh-aws",
+    "_ssh-aws": "ssh -i $AWS_KEY_PATH ec2-user@$AWS_HOST",
+    "initiate-pm2": "pm2 start npm --name \"app\" -- run start --watch"
   },
   "eslintConfig": {
     "extends": [
