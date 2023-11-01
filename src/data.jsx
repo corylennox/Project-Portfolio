@@ -65,7 +65,7 @@ export const skills = [
   },
   {
     id: 5,
-    skill: "Capable of integrating Firebase for scalable database solutions.",
+    skill: "Familiar with using Firebase for analytics and user tracking.",
   },
   {
     id: 6,
