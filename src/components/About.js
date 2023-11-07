@@ -13,9 +13,9 @@ export default function About() {
             I'm Cory, a current IT professional with a deep-seated passion for
             programming and creative problem solving. Over the years, I've
             cultivated a diverse set of skills in software development, both
-            through self-teaching and formal education. Despite my current role,
-            my aspiration is to transition into a programming position where I
-            can fully utilize my extensive range of coding skills.
+            through self-teaching and formal education. My aspiration is to
+            transition into a programming position where I can leverage my IT
+            experience and fully utilize my extensive range of coding skills.
           </p>
           <div className="flex justify-center">
             <button
