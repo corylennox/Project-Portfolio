@@ -1,4 +1,12 @@
 import { GithubMark, LinkedinMark } from "./assets/SocialIcons";
+import {
+  CodeBracketSquareIcon,
+  ComputerDesktopIcon,
+  CircleStackIcon,
+  DevicePhoneMobileIcon,
+  CloudIcon,
+  ClipboardDocumentListIcon,
+} from "@heroicons/react/24/solid";
 
 export const projects = [
   {
@@ -39,69 +47,61 @@ export const projects = [
   },
 ];
 
-export const skills = [
+export const skillCategories = [
   {
-    id: 0,
-    skill:
-      "Proficient in front-end web technologies, including HTML, JavaScript, and CSS for building interactive web interfaces.",
+    title: "Core Programming",
+    icon: <CodeBracketSquareIcon className="w-7 h-7 mr-1" />,
+    skills: ["HTML", "C#", "C++", "Java", "Python"],
   },
   {
-    id: 1,
-    skill:
-      "Experience with designing and developing web applications with React + Redux.",
+    title: "Front-end Development",
+    icon: <ComputerDesktopIcon className="w-7 h-7 mr-1" />,
+    skills: [
+      "JavaScript",
+      "TypeScript",
+      "React",
+      "CSS",
+      "Redux",
+      "JQuery",
+      "Bootstrap",
+      "Tailwind CSS",
+      "HeadlessUI",
+    ],
   },
   {
-    id: 2,
-    skill:
-      "Familiar with Apollo GraphQL for efficient data fetching and state management.",
+    title: "Back-end & Database Management",
+    icon: <CircleStackIcon className="w-7 h-7 mr-1" />,
+    skills: [
+      "Node.js",
+      "Apollo GraphQL",
+      "SQL",
+      "PostgreSQL",
+      "Firebase",
+      "JSON",
+    ],
   },
   {
-    id: 3,
-    skill: "Capable of implementing server-side logic using Node.js.",
+    title: "Mobile Development",
+    icon: <DevicePhoneMobileIcon className="w-7 h-7 mr-1" />,
+    skills: ["Swift", "SpriteKit", "UIKit"],
   },
   {
-    id: 4,
-    skill: "Experience with data management and querying with PostgreSQL.",
+    title: "Cloud & DevOps",
+    icon: <CloudIcon className="w-7 h-7 mr-1" />,
+    skills: ["AWS", "Docker", "EC2", "S3"],
   },
   {
-    id: 5,
-    skill: "Experience with using Firebase for analytics and user tracking.",
-  },
-  {
-    id: 6,
-    skill: "Experience with managing cloud-based resources on AWS.",
-  },
-  {
-    id: 7,
-    skill:
-      "Experience in RESTful API integration, for integrating third-party services.",
-  },
-  {
-    id: 8,
-    skill: "Proficiency in Swift programming for iOS app development.",
-  },
-  {
-    id: 9,
-    skill:
-      "Experience with UIKit for crafting intuitive user interfaces in iOS applications.",
-  },
-  {
-    id: 10,
-    skill:
-      "Experienced in utilizing SpriteKit for immersive game development on iOS.",
-  },
-  {
-    id: 11,
-    skill: "Experienced in C# and C++ programming.",
-  },
-  {
-    id: 12,
-    skill:
-      "Experience in using version control systems, particularly Git, for collaborative codebase management.",
-  },
-  {
-    id: 13,
-    skill: "Strong problem-solving capabilities and debugging skills.",
+    title: "Project Management & Workflow",
+    icon: <ClipboardDocumentListIcon className="w-7 h-7 mr-1" />,
+    skills: [
+      "Git",
+      "Linux",
+      "JIRA",
+      "ServiceNow",
+      "Slack",
+      "Microsoft Teams",
+      "Zoom",
+    ],
   },
 ];
 
