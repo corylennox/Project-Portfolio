@@ -24,7 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "ssh-aws": "npx dotenv-run-script _ssh-aws",
-    "_ssh-aws": "ssh -i $AWS_KEY_PATH ec2-user@$AWS_HOST",
+    "_ssh-aws": "ssh -i $AWS_KEY_PATH $AWS_USER@$AWS_HOST",
     "initiate-pm2": "pm2 start npm --name \"app\" -- run start --watch"
   },
   "eslintConfig": {
