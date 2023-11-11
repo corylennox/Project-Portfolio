@@ -76,6 +76,7 @@ export const skillCategories = [
       "Apollo GraphQL",
       "SQL",
       "PostgreSQL",
+      "Knex.js",
       "Firebase",
       "JSON",
     ],
