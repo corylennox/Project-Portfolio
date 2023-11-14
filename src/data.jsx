@@ -89,7 +89,7 @@ export const skillCategories = [
   {
     title: "Cloud & DevOps",
     icon: <CloudIcon className="w-7 h-7 mr-1" />,
-    skills: ["AWS", "Docker", "EC2", "S3"],
+    skills: ["AWS", "Docker", "EC2", "Amazon Linux", "Ubuntu"],
   },
   {
     title: "Project Management & Workflow",
