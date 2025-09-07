@@ -1,10 +1,10 @@
 import "./tailwind.css";
 import React, { useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import Skills from "./components/Skills";
-import Connect from "./components/Connect";
+import Navbar from "./components/Navbar.jsx";
+import About from "./components/About.jsx";
+import Projects from "./components/Projects.jsx";
+import Skills from "./components/Skills.jsx";
+import Connect from "./components/Connect.jsx";
 
 export default function App() {
   const [theme, setTheme] = useState(() => {
