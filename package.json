@@ -21,7 +21,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "ssh": "source .env && sshpass -p \"$SYN_PASSWORD\" ssh \"$SYN_USERNAME\"@\"$SSH_IP_ADDRESS\"",
-    "deploy": "npm run build && cd ../ && printf '%s\n' \"$SYN_PASSWORD\" | sudo -S -p '' docker compose restart web"
+    "deploy": "npm run build && cd ../ && printf '%s\n' \"$SYN_PASSWORD\" | sudo -S -p '' docker compose restart"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.16",

@@ -2,9 +2,8 @@
 /node_modules
 
 # production builds
-/build
+/dist
 
 # misc
 .env
-/certs
 .DS_Store
