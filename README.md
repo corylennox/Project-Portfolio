@@ -21,7 +21,9 @@ Clone this repository and then run the following command to install all the depe
 
 ## Scripts
 
-- Start the development server: `npm start`
+- Start the development server: `npm run dev`
+- Build for production: `npm run build`
+- Preview production build: `npm run preview`
 
 ## Live Demo
 
