@@ -21,9 +21,9 @@ export const projects = [
   {
     id: 1,
     title: "Betting Exchange (Under Construction)",
-    subtitle: "React + Redux, Node.js, PSQL, GSQL",
+    subtitle: "Swift, Go, Rust, PSQL, AWS EC2",
     description:
-      " A betting exchange web application that allows users to bet against each other on the outcome of sporting events. It's built with React + Redux on the frontend, Node.js on the backend, and PostgreSQL as the database, and it's hosted on AWS using EC2.",
+      " A daily fantasy Pick’em app that applies financial market infrastructure to sports gaming. This project is composed of Swift for the frontend, Rust and Go for the backend, and PostgreSQL for the database, and it's hosted on AWS using EC2.",
     link: "https://openbook.gg/",
     image: "./bettingexchange.png",
   },
@@ -38,10 +38,10 @@ export const projects = [
   },
   {
     id: 3,
-    title: "Example website",
+    title: "Mock website",
     subtitle: "HTML, JS, CSS, JQuery",
     description:
-      "An example website I made to showcase front-end UI design. It's a simple website that uses HTML, CSS, javascript and JQuery.",
+      "A mock website I made to showcase front-end UI design. It's a simple website that uses HTML, CSS, javascript and JQuery.",
     link: "travelwebsite.html",
     image: "./examplewebsite.png",
   },
